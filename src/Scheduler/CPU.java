@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 public class CPU {
 
     int numOfCores;
-    ExecutorService es;// es = Executors.newFixedThreadPool(numOfCores);
+    public ExecutorService es;// es = Executors.newFixedThreadPool(numOfCores);
 
     public CPU(int num){
         numOfCores = num;

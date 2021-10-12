@@ -83,18 +83,21 @@ public class allCommands {
                         System.out.println("please enter amount ");
                         // myObj = new Scanner(System.in);
                         amount = myObj.nextInt();
-                        sharedState.alltasks.add(new Bounded_Buffer(new ConcreteTask()));
+                        for(int i = 0; i< amount; i++) {
+                            sharedState.alltasks.add(new Bounded_Buffer(new ConcreteTask()));
 
-                        sharedState.numOfProcesses += amount;
-
+                            sharedState.numOfProcesses += amount;
+                        }
                         break;
                     }
                     case 3: {
                         System.out.println("please enter amount ");
                         // myObj = new Scanner(System.in);
                         amount = myObj.nextInt();
-                        sharedState.alltasks.add(new Dining_Philosppers(new ConcreteTask()));
-                        sharedState.numOfProcesses += amount;
+                        for(int i = 0; i< amount; i++) {
+                            sharedState.alltasks.add(new Dining_Philosppers(new ConcreteTask()));
+                            sharedState.numOfProcesses += amount;
+                        }
                         break;
                     }
                 }

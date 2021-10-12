@@ -38,6 +38,7 @@ public class Scheduler {
 
     public void activate(ArrayList<Task> tasks, CPU coreInfo, String fcfs) {
         FCFS f = new FCFS(tasks, cpu);
+        f.execute();
     }
 
 
