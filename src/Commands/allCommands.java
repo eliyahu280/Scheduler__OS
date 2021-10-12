@@ -5,6 +5,7 @@ import Task.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class allCommands {
@@ -17,6 +18,7 @@ public class allCommands {
         static HashMap<Task, Integer> numProcessType;
         static String algName;
         static int numCore;
+
     }
 
     private Shared sharedState = new Shared();
@@ -69,8 +71,11 @@ public class allCommands {
                         amount = myObj.nextInt();
                         sharedState.numProcessType = new HashMap<Task, Integer>();//init
                         // sharedState.numProcessType.put()
-                        sharedState.alltasks.add(new ReadWriteprob(new ConcreteTask()));
-                        sharedState.numOfProcesses += amount;
+                        for(int i = 0; i< amount; i++){
+
+                            sharedState.alltasks.add(new ReadWriteprob(new ConcreteTask()));
+                            sharedState.numOfProcesses += amount;
+                        }
                         break;
                     }
                     case 2: {
@@ -93,7 +98,16 @@ public class allCommands {
                         break;
                     }
                 }
+                System.out.println("\nwould you like to add another Process?" + "\n Y" + "N\n");
+
+                Scanner word = new Scanner(System.in);
+                w = word.nextLine();
+
+                b = (w.equals("Y") || w.equals("y")) ? true : false;
+                //word.close();
+              //  myObj.close();
             }
+
         }
 
     }
@@ -139,10 +153,47 @@ public class allCommands {
 
         @Override
         public void execute() {
+            System.out.println("kfj");
+            sharedState.scheduler= Scheduler.getInstance(sharedState.alltasks,sharedState.numCore,"FCFS");
+            //sharedState.scheduler.activate();
+          //  sharedState.scheduler.activate(sharedState.alltasks,sharedState.numCore,"FCFS");
+            //Scheduler c = Scheduler.getInstance();
 
-            sharedState.scheduler.getInstance();
+            // sharedState.scheduler
         }
     }
 
+    public class DisplayResult extends Command {
 
+        public DisplayResult() {
+            super("5. display result\n");
+        }
+
+        @Override
+        public void execute() {
+        }
+    }
+    public class ChangeALG extends Command {
+
+        public ChangeALG() {
+            super("6. change algorithm");
+        }
+
+        @Override
+        public void execute() {
+
+        }
+    }
+
+    public class Exit extends Command {
+
+        public Exit() {
+            super("7. Exit \n");
+        }
+
+        @Override
+        public void execute() {
+
+        }
+    }
 }

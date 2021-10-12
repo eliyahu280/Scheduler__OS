@@ -14,9 +14,9 @@ public class CLI {
         commands.add(allcmd.new CreateCPU());
         commands.add(allcmd.new SelectALG());
         commands.add(allcmd.new Running());
-      /*  commands.add(allcmd.new DisplayResult());
+        commands.add(allcmd.new DisplayResult());
         commands.add(allcmd.new ChangeALG());
-        commands.add(allcmd.new Exit());*/
+        commands.add(allcmd.new Exit());
 
 
     }
@@ -35,3 +35,4 @@ public class CLI {
 
 
 }
+

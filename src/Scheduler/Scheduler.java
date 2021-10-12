@@ -1,34 +1,45 @@
 package Scheduler;
 
-import Algorithm.Algorithm;
-import Task.Task;
+import Algorithm.*;
+import Task.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 //Singleton
 public class Scheduler {
 
-    Algorithm alg;
-    CPU cpu;
-    Queue<Task> queue;
-    int available_cores, cores_in_use;
+    static Algorithm alg;
+    static CPU cpu;
+    static Queue<Task> queue;
+    static int available_cores, cores_in_use;
 
+    private static volatile Scheduler scheduler_instance;
 
-    private volatile Scheduler scheduler_instance;
-
-
-    public Scheduler getInstance() {
+    public static Scheduler getInstance(ArrayList<Task> t, int numCores, String namealg) {
         Scheduler localRef = scheduler_instance;
 
         if (localRef == null) {
-            synchronized (this) {
+            synchronized (Scheduler.class) {// was (this)
                 localRef = scheduler_instance;
                 if (localRef == null) {
+
                     scheduler_instance = localRef = new Scheduler();
+                    scheduler_instance.cpu = new CPU(numCores);
+
                 }
             }
         }
+        localRef.activate(t, cpu, "fcf");
         return localRef;
     }
 
+
+    public void activate(ArrayList<Task> tasks, CPU coreInfo, String fcfs) {
+        FCFS f = new FCFS(tasks, cpu);
+    }
+
+
 }
+//   https://medium.com/@kevalpatel2106/how-to-make-the-perfect-singleton-de6b951dfdb0

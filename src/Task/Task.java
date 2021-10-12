@@ -9,7 +9,7 @@ public abstract class Task implements Process {
     int memory; //maybe a constant number for each type of process
     int processID; //get randomly
     int burstTime; //maybe to do it static, also a constant number for each type
-    PCB pcb;
+    public PCB pcb;
     //for decorator
     protected
     Process ps;
