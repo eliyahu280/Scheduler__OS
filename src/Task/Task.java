@@ -8,7 +8,7 @@ public abstract class Task implements Process {
     protected
     int memory; //maybe a constant number for each type of process
     int processID; //get randomly
-    int burstTime; //maybe to do it static, also a constant number for each type
+    int burstTime, startTime; //maybe to do it static, also a constant number for each type
     PCB pcb;
     //for decorator
     protected
@@ -18,8 +18,6 @@ public abstract class Task implements Process {
     Task(Process ps) {
           //  super(ps);
             pcb = new PCB();
-
-
     }
 
     public int getMemory() {
@@ -44,6 +42,14 @@ public abstract class Task implements Process {
 
     public void setBurstTime(int burstTime) {
         this.burstTime = burstTime;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
     public PCB getPcb() {

@@ -22,6 +22,7 @@ public class FCFS extends Algorithm{
         /*execute();*/
     }
 
+
     @Override
     public void execute() {
         //sort the Task according to arrival time
@@ -73,8 +74,7 @@ public class FCFS extends Algorithm{
             es.execute(()-> System.out.println("third execute"));
 
         }
-
-
+        System.out.println(es.isTerminated());
         System.out.println("sum time is : " + sumTime);
     }
 
@@ -85,15 +85,23 @@ public class FCFS extends Algorithm{
 
             task.run(); // do the reading or Task of the specific task
 
-            int finishT = task.getPcb().getFinishTime() + task.getPcb().getArrivalTime(); // maybe to do it with the real time it took
+            task.getPcb().setFinishTime(task.getPcb().getArrivalTime() + task.getBurstTime()); // finish = arrival + burst
+
+            int finishT = task.getPcb().getFinishTime() + task.getPcb().getArrivalTime();  // finish from the "beginning measurement of time and not from arrival"
+
             task.getPcb().setFinishTime(finishT);//finish time = arrival + burt
+
             finish.set(task.getPcb().getFinishTime());
 
         }
 	else // the first Task (one of them)
         {
             task.run();
+
+            task.getPcb().setFinishTime(task.getPcb().getArrivalTime() + task.getBurstTime()); // finish = arrival + burst
+
             task.getPcb().setFinishTime(finish.get() + task.getBurstTime());
+
             finish.set(task.getPcb().getFinishTime());
         }
 	    sumTime.set(task.getPcb().getFinishTime() - task.getPcb().getArrivalTime());

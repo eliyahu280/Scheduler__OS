@@ -14,4 +14,7 @@ public class CPU {
         es = Executors.newFixedThreadPool(numOfCores);
     }
 
+    public int getNumOfCores() {
+        return numOfCores;
+    }
 }
