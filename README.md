@@ -3,7 +3,7 @@ Operating system scheduler
 
 Components:
 
-Process, Resources, CPU, Process Scheduling. Short term scheduler (algorithms to choose).
+Process, Resources, CPU, Scheduler, Short term scheduler (algorithms to choose).
 
 ## Project description:
 
