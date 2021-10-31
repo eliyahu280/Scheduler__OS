@@ -71,7 +71,7 @@ public class allCommands {
                         amount = myObj.nextInt();
                         sharedState.numProcessType = new HashMap<Task, Integer>();//init
                         // sharedState.numProcessType.put()
-                        for(int i = 0; i< amount; i++){
+                        for (int i = 0; i < amount; i++) {
 
                             sharedState.alltasks.add(new ReadWriteprob(new ConcreteTask()));
                             sharedState.numOfProcesses += amount;
@@ -83,7 +83,7 @@ public class allCommands {
                         System.out.println("please enter amount ");
                         // myObj = new Scanner(System.in);
                         amount = myObj.nextInt();
-                        for(int i = 0; i< amount; i++) {
+                        for (int i = 0; i < amount; i++) {
                             sharedState.alltasks.add(new Bounded_Buffer(new ConcreteTask()));
 
                             sharedState.numOfProcesses += amount;
@@ -94,7 +94,7 @@ public class allCommands {
                         System.out.println("please enter amount ");
                         // myObj = new Scanner(System.in);
                         amount = myObj.nextInt();
-                        for(int i = 0; i< amount; i++) {
+                        for (int i = 0; i < amount; i++) {
                             sharedState.alltasks.add(new Dining_Philosppers(new ConcreteTask()));
                             sharedState.numOfProcesses += amount;
                         }
@@ -108,7 +108,7 @@ public class allCommands {
 
                 b = (w.equals("Y") || w.equals("y")) ? true : false;
                 //word.close();
-              //  myObj.close();
+                //  myObj.close();
             }
 
         }
@@ -126,11 +126,11 @@ public class allCommands {
 
             System.out.println("num of cores");
             Scanner in = new Scanner(System.in);
-            //int num = in.nextInt();
             sharedState.numCore = in.nextInt();
 
         }
     }
+
     public class SelectALG extends Command {
 
         public SelectALG() {
@@ -148,6 +148,7 @@ public class allCommands {
 
         }
     }
+
     public class Running extends Command {
 
         public Running() {
@@ -157,9 +158,9 @@ public class allCommands {
         @Override
         public void execute() {
             System.out.println("kfj");
-            sharedState.scheduler= Scheduler.getInstance(sharedState.alltasks,sharedState.numCore,"FCFS");
+            sharedState.scheduler = Scheduler.getInstance(sharedState.alltasks, sharedState.numCore, "FCFS");
             //sharedState.scheduler.activate();
-          //  sharedState.scheduler.activate(sharedState.alltasks,sharedState.numCore,"FCFS");
+            //  sharedState.scheduler.activate(sharedState.alltasks,sharedState.numCore,"FCFS");
             //Scheduler c = Scheduler.getInstance();
 
             // sharedState.scheduler
@@ -176,6 +177,7 @@ public class allCommands {
         public void execute() {
         }
     }
+
     public class ChangeALG extends Command {
 
         public ChangeALG() {
