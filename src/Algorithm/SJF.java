@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,16 +15,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 // non-preemptive algorithm
 public class SJF extends Algorithm {
 
-    static AtomicInteger time,esCount;
+    static AtomicInteger time, esCount;
     ExecutorService es;
     List<Task> activePcs;// prs that arrives in the same time and now it's their turn
-    Queue<Task>readyQueue;
-    PriorityBlockingQueue<Task>pq;
+    Queue<Task> readyQueue;
+    PriorityBlockingQueue<Task> pq;
     int sum;
     boolean[] flag;
     Thread run;
     volatile boolean stop;
-    Runnable stopTask=()->stop=true;
+    Runnable stopTask = () -> stop = true;
     Runnable runnable;
 
     public SJF(ArrayList<Task> tasks, CPU cpu) {
@@ -34,7 +33,7 @@ public class SJF extends Algorithm {
         time = new AtomicInteger(0);
         flag = new boolean[tasks.size()];
         activePcs = new ArrayList<Task>(); //list of arrived processes
-        pq = new PriorityBlockingQueue<Task>(1000,(t1,t2)-> {
+        pq = new PriorityBlockingQueue<Task>(1000, (t1, t2) -> {
             if (t1.getBurstTime() != t2.getBurstTime())
                 return (t1.getBurstTime() - t2.getBurstTime());
             return t2.getBurstTime() - t1.getBurstTime();
@@ -57,29 +56,69 @@ public class SJF extends Algorithm {
         );
 
 
-         //   while(!stop){
 
 
-            tasks.forEach(t-> System.out.println(t.getPcb().getArrivalTime()));
 
-                for(int i = 0 ; i < tasks.size() ; i ++)  // need to add increase for time
+        tasks.forEach(t -> System.out.println(t.getPcb().getArrivalTime()));
+
+        for (int i = 0; i < tasks.size(); i++)  // need to add increase for time
+        {
+
+           // tasks.get(i).setStartTime(time.get());
+            pq.add(tasks.get(i));
+
+          //  time.incrementAndGet();
+        }
+        pq.forEach(p -> System.out.println(p.getBurstTime()));
+
+
+
+        time.set(0);
+        System.out.println("----------------------------------");
+
+        for(int i = 0 ; i < tasks.size() ; i++){
+            if(!pq.isEmpty()){
+                if(pq.peek().getPcb().getArrivalTime() == i)
                 {
-                    time.set(cpu.getNumOfCores());
-
-                    tasks.get(i).setStartTime(time.get());
-
-                    pq.add(tasks.get(i));
-
-                    time.incrementAndGet();
+                    if(esCount.get() == 0){
+                        time.incrementAndGet();
+                        esCount.set(cpu.getNumOfCores());
+                    }
+                    es.execute(() -> {
+                        try {
+                            runOneTask(pq.take());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    esCount.decrementAndGet();
                 }
+            }
+            time.incrementAndGet();
+        }
 
-                System.out.println("----------------------------------");
-                pq.forEach(p->{es.execute(()->runOneTask(p));});
-                pq.forEach(p-> System.out.println(p.getBurstTime()));
-                es.execute(stopTask);
-      //      }
 
-       // es.execute(stopTask);
+
+
+        /*pq.forEach(p -> {
+            if(esCount.get() == 0){
+                time.incrementAndGet();
+                esCount.set(cpu.getNumOfCores());
+            }
+            es.execute(() -> {
+                try {
+                    runOneTask(pq.take());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            esCount.decrementAndGet();
+        });*/
+
+        es.execute(stopTask);
+        //      }
+
+        // es.execute(stopTask);
 
         System.out.println("FINISH LOOP");
 
@@ -110,41 +149,13 @@ public class SJF extends Algorithm {
 
     public void runOneTask(Task task) {
 
-         task.run();
-
+        task.run();
         System.out.println("inside runOneTask");
-        if (!activePcs.isEmpty()) {
 
-                for (int j = 0; j < tasks.size(); j++) {
+        task.setStartTime(time.get());
+        task.getPcb().setFinishTime(task.getStartTime() + task.getBurstTime());
 
-                    if (tasks.get(j).getProcessID() == task.getProcessID()) {
-
-                        tasks.get(j).getPcb().setFinishTime(tasks.get(j).getStartTime() + tasks.get(j).getBurstTime());
-                        System.out.println("started time" + tasks.get(j).getStartTime());
-                        System.out.println("burst time" +tasks.get(j).getBurstTime());
-                     //   activePcs.remove(task);
-                        //countRemain.incrementAndGet();
-                        break;
-                    }
-                  //  System.out.println("countRemain inside runOneTask:"+ startTime.get());
-                    System.out.println("activePcs inside runOneTask:" + activePcs.size());
-                }
-               /* Iterator<Task> iter = tasks.iterator();
-                Iterator<Task> iterActive = activePcs.iterator();
-                while (iter.hasNext()) {
-
-                    Task ts = iterActive.next();
-
-                    if (ts.getProcessID() == task.getProcessID()) {
-                        iter.getPcb().setFinishTime(time.get() + 1);
-                        iter.remove();
-                        countRemain.incrementAndGet();
-                        break;
-                    }
-                }*/
-           // }
         }
     }
 
 
-}
