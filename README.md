@@ -1,4 +1,4 @@
-# OS Scheduler
+# OS Scheduler 
 Operating system scheduler
 
 Components:
@@ -30,3 +30,14 @@ Process, Resources, CPU, Process Scheduling. Short term scheduler (algorithms to
 5.  The Program Initializing in accord to the user choices.
 6.	The program will run the processes and displaying to the user: CPU utilization, Throughout, Turnaround time, waiting time regarding the selected features of the processes.
       
+### Design Patterns(for now):
+1.	Bridge – for algorithm.
+2.	Factory – for the selected algorithm.
+3.	Decorator – to create Tasks and have and more flexible code.
+4.	Singleton – for Scheduler and some components.
+5.	Command Pattern – for menu.
+6.	Strategy.
+
+
+
+Note - This Project is still in progress.
