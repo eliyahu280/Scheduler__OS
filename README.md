@@ -7,11 +7,11 @@ Process, Resources, CPU, Scheduler, Short term scheduler (algorithms to choose).
 
 ## Project description:
 
-•	Goal of Project:
-    Creating Simulators of the of the Operating System with the help of some of the above components.
-    The goal is to demonstrate the process life cycle with consideration of it’s resources in accordance with the chosen algorithm and showing how computer multitasking works.
+Project Goal:
+    Creating Simulators of the of the Operating System with the help of some of the above components.           
+    The goal is to demonstrate the process life cycle with consideration of it’s resources in accordance with the chosen algorithm and showing how computer multitasking works.     
     Each process will be able to divide itself to threads to be able to work in parallel.        
-    The process\ Task will deal with synchronization problems, and for multitasking will be used of the  thread pools.
+    The process\ Task will deal with synchronization problems, and for multitasking will be used of the  thread pools.              
     The Scheduler component assigning resources to each process and will be Singleton.
     
 ## Task of each Process:
