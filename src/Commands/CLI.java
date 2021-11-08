@@ -17,8 +17,6 @@ public class CLI {
         commands.add(allcmd.new DisplayResult());
         commands.add(allcmd.new ChangeALG());
         commands.add(allcmd.new Exit());
-
-
     }
 
     public void displayMenu() {
@@ -27,9 +25,8 @@ public class CLI {
     }
 
     public void start() {
-
         displayMenu();
-        for(allCommands.Command c : commands)
+        for (allCommands.Command c : commands)
             c.execute();
     }
 
