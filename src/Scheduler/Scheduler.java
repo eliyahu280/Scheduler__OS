@@ -34,6 +34,7 @@ public class Scheduler {
                         c = Class.forName("Algorithm." + alg);
                         Constructor<?> cons = c.getConstructor(ArrayList.class, CPU.class);
                         object = cons.newInstance(t, cpu);
+
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (InvocationTargetException e) {

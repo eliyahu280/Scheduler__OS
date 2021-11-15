@@ -100,9 +100,7 @@ public class allCommands {
                 b = (w.equals("Y") || w.equals("y")) ? true : false;
 
             }
-
         }
-
     }
 
     public class CreateCPU extends Command {
@@ -162,7 +160,6 @@ public class allCommands {
 
         @Override
         public void execute() {
-            System.out.println("kfj");
             sharedState.scheduler = Scheduler.getInstance(sharedState.alltasks, sharedState.numCore, sharedState.algName);
         }
     }

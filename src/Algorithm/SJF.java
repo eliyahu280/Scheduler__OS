@@ -48,6 +48,8 @@ public class SJF extends Algorithm {
         );
 
         tasks.forEach(t -> System.out.println(t.getPcb().getArrivalTime()));
+        System.out.println("burst time:");
+        tasks.forEach(t -> System.out.println(t.getPriority()));
 
         System.out.println("-----------------------------------------------");
 
@@ -96,13 +98,13 @@ public class SJF extends Algorithm {
 
     //    System.out.println("FINISH LOOP");
         es.execute(stopTask);
-        es.shutdown();
-        try {
-            // wait until es is done (or max minutes)
-            es.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            es.shutdown();
+            try {
+                // wait until es is done (or max minutes)
+                es.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 /*
 
         for (Task t : tasks) {
