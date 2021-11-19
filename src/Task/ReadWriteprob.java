@@ -1,14 +1,11 @@
 package Task;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.util.Random;
-import java.net.URL;
 import java.util.Scanner;
 
 
-
-public class ReadWriteprob extends Task{
+public class ReadWriteprob extends Task {
 
     public ReadWriteprob(Process p) {
         super(p);
@@ -22,29 +19,27 @@ public class ReadWriteprob extends Task{
 
     @Override
     public void run() {
-        System.out.println("inside run of Read write lala");
         Scanner in;
         PrintWriter out;
 
         try {
-            in=new Scanner(new FileReader("txtFile"));
-            out=new PrintWriter(new FileWriter("txtFile"));
+            synchronized (this) {
+            //    System.out.println("this  " + this.toString());
+                out = new PrintWriter(new FileWriter("txtFile"));
+                out.println("txt written in file");
+                in = new Scanner(new FileReader("txtFile"));
+
+                out.close();
+                while (in.hasNext())
+                    System.out.println(in.next());
+
+                in.close();
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-      /*  try {
-            Thread.sleep(10);
-           // System.out.println("inside run of Read write");
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
     }
-
-
 }

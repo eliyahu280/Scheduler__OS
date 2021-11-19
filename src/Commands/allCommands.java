@@ -1,18 +1,15 @@
 package Commands;
 
-import Algorithm.Algorithm;
 import Scheduler.Scheduler;
 import Task.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class allCommands {
 
     private static class Shared {
-        static String instruction;
         static Scheduler scheduler;
         static int numOfProcesses;
         static ArrayList<Task> alltasks = new ArrayList<Task>();

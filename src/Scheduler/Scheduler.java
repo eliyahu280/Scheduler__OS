@@ -6,7 +6,6 @@ import Task.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 
 //Singleton
@@ -19,6 +18,11 @@ public class Scheduler {
     static Object object;
 
     private static volatile Scheduler scheduler_instance;
+
+    private Scheduler(){
+     if(scheduler_instance != null)
+         throw new RuntimeException("Use getInstance() method to get the single instance of this class.");
+    }
 
     public static Scheduler getInstance(ArrayList<Task> t, int numCores, String alg) {
         Scheduler localRef = scheduler_instance;
@@ -55,15 +59,9 @@ public class Scheduler {
     }
 
     public void activate() {
-       /* FCFS f = new FCFS(tasks, cpu);
-        f.execute();*/
-        //   SJF sjf = new SJF(tasks, cpu);
-        //sjf.execute();
-        //alg = new SJF(tasks, cpu);
         alg = (Algorithm) object;
         alg.execute();
     }
-
-
 }
+//   this singleton based on :
 //   https://medium.com/@kevalpatel2106/how-to-make-the-perfect-singleton-de6b951dfdb0

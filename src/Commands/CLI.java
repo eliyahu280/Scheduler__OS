@@ -29,7 +29,5 @@ public class CLI {
         for (allCommands.Command c : commands)
             c.execute();
     }
-
-
 }
 

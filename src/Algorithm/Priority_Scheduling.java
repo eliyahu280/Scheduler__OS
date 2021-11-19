@@ -6,7 +6,6 @@ import Task.Task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -107,9 +106,5 @@ public class Priority_Scheduling extends Algorithm {
         double meanTurnAround = sum / (double) tasks.size();
         System.out.println("meanTurnAround time is : " + meanTurnAround);
         System.out.println("sum time is : " + sum);
-
-
     }
-
-
 }

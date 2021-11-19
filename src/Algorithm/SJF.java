@@ -76,7 +76,7 @@ public class SJF extends Algorithm {
                 }
 
                 //update timing of current pcs
-                System.out.println("time is :"+ time.get());
+                System.out.println("time is :" + time.get());
                 t.setStartTime(time.get());
                 t.getPcb().setFinishTime(t.getStartTime() + t.getBurstTime());
                 es.execute(() -> {
@@ -89,22 +89,20 @@ public class SJF extends Algorithm {
                 esCount.decrementAndGet();
 
             }
-            sum+=  activePcs.get(activePcs.size() - 1).getPcb().getFinishTime() - activePcs.get(activePcs.size() - 1).getStartTime();
+            sum += activePcs.get(activePcs.size() - 1).getPcb().getFinishTime() - activePcs.get(activePcs.size() - 1).getStartTime();
             activePcs.clear();
             esCount.set(cpu.getNumOfCores());
             time.incrementAndGet();
-
         }
-
-    //    System.out.println("FINISH LOOP");
+        //    System.out.println("FINISH LOOP");
         es.execute(stopTask);
-            es.shutdown();
-            try {
-                // wait until es is done (or max minutes)
-                es.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        es.shutdown();
+        try {
+            // wait until es is done (or max minutes)
+            es.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 /*
 
         for (Task t : tasks) {

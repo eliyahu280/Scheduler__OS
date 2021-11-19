@@ -6,9 +6,9 @@ import Scheduler.PCB;
 public abstract class Task implements Process {
 
     protected
-    int memory; //maybe a constant number for each type of process
+    int memory;
     int processID; //get randomly
-    int burstTime, startTime; //maybe to do it static, also a constant number for each type
+    int burstTime, startTime;
     int priority;
     PCB pcb;
     //for decorator
